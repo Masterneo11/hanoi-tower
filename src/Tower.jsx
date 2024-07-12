@@ -3,7 +3,7 @@ import React from 'react';
 import Disc from './Disc';
 import { useDroppable } from '@dnd-kit/core';
 
-export default function Tower({ towerId, discs }) {
+export default function Tower({ towerId, discs , child}) {
     const { isOver, setNodeRef } = useDroppable({
         id: towerId,
     });
@@ -17,6 +17,7 @@ export default function Tower({ towerId, discs }) {
             discSRC={disc} 
             isTopDisc={i === 0} />
             )}
+            {child}
         </div>
     );
 }

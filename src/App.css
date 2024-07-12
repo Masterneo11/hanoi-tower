@@ -43,7 +43,7 @@
   flex-direction: column;
   justify-content: flex-end;
 
-  padding-bottom: 61px;
+  padding-bottom: 67px;
 
 }
 .tower img {
@@ -58,7 +58,10 @@
   
   
 }
-
+.counter {
+  display: flex;
+  align-self: center;
+}
 
 /* .tower {
   display: flex;

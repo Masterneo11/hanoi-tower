@@ -5,6 +5,9 @@ import d2 from "./assets/HanBLE.svg";
 import d3 from "./assets/HaORB.svg";
 import d4 from "./assets/d4.svg";
 import { DndContext } from '@dnd-kit/core';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Counter from "./Counter";
 import { useDrag } from 'react-dnd';
 
 const discs = [
@@ -20,7 +23,33 @@ export default function Game() {
         t1: [...discs],
         t2: [],
         t3: [],
+    });
+    const [moveCount , setMoveCount] = useState(0);
+
+    const message = " Can't put a bigger disc on a smaller disc "
+    const notify = () => toast.error(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+
+    });
+    const w = " Congragulations You win "
+    const win = () => toast.success(w, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
     })
+
     const handleDragEnd = ({ active, over }) => {
         setParent(over ? over.id : null);
         const newT1 = towerState.t1.filter(disc => disc.id !== active.id);
@@ -38,6 +67,7 @@ export default function Game() {
             // tower it came from
             if (disc.id > lastDisc.id) {
                 console.log("bad move");
+                notify();
                 return;
             }
         }
@@ -47,19 +77,56 @@ export default function Game() {
         } else if (over.id === "t3") {
             newT3.unshift(disc);
         }
+        if (targetDiscs.lengh > 3) {
+            console.log("finish")
+        }
+
         setTowerState({
             t1: newT1,
             t2: newT2,
             t3: newT3,
         });
-    }
+        setMoveCount(prevCount => prevCount + 1);
+        if (newT2.length === discs.length) {
+            console.log("t2 is full");
+            win();
+        }
+        if (newT3.length === discs.length) {
+            console.log("t3 is full");
+            win();
+        }
+        if (newT1.length === discs.length) {
+            console.log("t1 is full");
+            win();
+        }
+    };
     return (
         <div className="game">
-            <DndContext onDragEnd={handleDragEnd}>
+              <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"/>
+              <DndContext onDragEnd={handleDragEnd}>
                 < Tower towerId={"t1"} discs={towerState.t1} />
                 < Tower towerId={"t2"} discs={towerState.t2} />
                 < Tower towerId={"t3"} discs={towerState.t3} />
+                <Counter count={moveCount} />
             </DndContext>
+            {/* <DndContext onDragEnd={handleDragEnd}>
+                < Tower towerId={"t1"} discs={towerState.t1} />
+                <div className="tc">
+                < Tower towerId={"t2"} discs={towerState.t2} />
+                    <Counter count={moveCount} />
+                </div>
+                < Tower towerId={"t3"} discs={towerState.t3} />
+            </DndContext> */}
         </div >
     );
 }
