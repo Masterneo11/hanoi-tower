@@ -17,6 +17,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .game {
   display: flex;
   align-items: flex-end;
@@ -28,11 +29,12 @@
 
   background-image: url("./assets/bg.jpg");
   background-size: cover;
-  background-blend-mode:color-burn;
+  background-blend-mode: color-burn;
 
 }
+
 .tower {
-  background-image:  url("./assets/Tow.svg");
+  background-image: url("./assets/Tow.svg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -46,22 +48,65 @@
   padding-bottom: 67px;
 
 }
-.tower img {
-  transform: scale(0.65); 
-  padding: 0;
-  display: flex; 
-  flex-direction: column;
-  align-items: flex-end; 
-  margin-bottom: -14.8px;
-  
 
-  
-  
+.tower img {
+  transform: scale(0.65);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: -14.8px;
+
+
+
+
 }
+
 .counter {
   display: flex;
   align-self: center;
 }
+
+.counter {
+  font-size: 1rem;
+  color: #ffffff;
+  /* Base color of the text */
+  text-shadow:
+    0 0 5px #ffffff,
+    0 0 10px #ffffff,
+    0 0 20px #3edced,
+    0 0 40px #62b7db,
+    0 0 80px #ffffff,
+    0 0 160px #ffffff;
+  animation: flicker .05s infinite alternate;
+}
+
+/* @keyframes flicker {
+
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 5px #a4e0e6,
+      0 0 10px #00ff00,
+      0 0 20px #00ff00,
+      0 0 40px #00ff00,
+      0 0 80px #00ff00,
+      0 0 160px #00ff00;
+  } */
+
+  /* 50% {
+    opacity: 0.5;
+    text-shadow:
+      0 0 2px #00ff00,
+      0 0 5px #00ff00,
+      0 0 10px #00ff00,
+      0 0 20px #00ff00,
+      0 0 40px #00ff00,
+      0 0 80px #00ff00;
+  } */
+
+
 
 /* .tower {
   display: flex;

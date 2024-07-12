@@ -38,7 +38,7 @@ export default function Game() {
         theme: "colored",
 
     });
-    const w = " Congragulations You win "
+    const w = " Congragulations You just got hacked, nah jk jk  "
     const win = () => toast.success(w, {
         position: "top-center",
         autoClose: 5000,
@@ -77,9 +77,9 @@ export default function Game() {
         } else if (over.id === "t3") {
             newT3.unshift(disc);
         }
-        if (targetDiscs.lengh > 3) {
-            console.log("finish")
-        }
+        // if (targetDiscs.lengh > 3) {
+        //     console.log("finish")
+        // }
 
         setTowerState({
             t1: newT1,
